@@ -1,14 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import styled from 'styled-components';
 import { GlobalStyle } from './styles/global';
-const Title = styled.h1`
-  color: blue;
-`;
+import { Header } from './components/header';
+import { Summary } from './components/summary';
+import { NewTransactionsModal } from './components/newTransactionsModal';
+import { TransactionsTable } from './components/transationsTable';
+import { useState } from 'react';
 export function App() {
+  const [isNewTransactionsModalOpen, setIsNewTransactionModalOpen] = useState(false);
+  function handleOpenNewTransactionsModal(){
+    setIsNewTransactionModalOpen(true);
+  }
+
+  function handleCloseNewTransactionsModal(){
+    setIsNewTransactionModalOpen(false);
+  }
   return (
     <div className="App">
-      <Title>Hello World!</Title>
+      <Header onOpenNewTransactionsModal={handleOpenNewTransactionsModal}></Header>     
+      <Summary></Summary> 
+      <TransactionsTable></TransactionsTable>
+      <NewTransactionsModal isOpen={isNewTransactionsModalOpen} onRequestClose={handleCloseNewTransactionsModal}></NewTransactionsModal>
       <GlobalStyle/>
     </div>
   );
