@@ -3,6 +3,11 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <h1>App</h1>
+    <>
+      <Head>
+        <title>ig.news | Home</title>
+      </Head>
+      <h1>Home</h1>
+    </>
   )
 }
