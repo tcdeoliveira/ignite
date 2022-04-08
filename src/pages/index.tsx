@@ -22,7 +22,7 @@ export default function Home({product}:IHomeProps) {
           <span className={styles.homeContainer__heyWelcomeSpan}>👏 Hey, welcome</span>
           <h1>News about the <span>React</span> world.</h1>
           <p>Get access to all <br/> <span>for {product.amount} month</span></p>
-          <SubscribeButton/> 
+          <SubscribeButton priceId={product.priceId}/> 
         </section>
         <img src="/images/avatar.svg" alt="Girl coding" />
       </main>
