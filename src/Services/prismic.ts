@@ -1,12 +1,9 @@
 import * as Prismic from '@prismicio/client'
-import { clear } from 'console'
 
 // Fill in your repository name
 export const repositoryName = process.env.PRISMIC_REPOSITORY_NAME
 
 export function getPrismicClient(req?:unknown){ 
-  clear();
-  console.log('get primisc')
   var client = Prismic.createClient(repositoryName, {
     // If your repo is private, add an access token
     accessToken: process.env.PRISMIC_ACCESS_TOKEN,

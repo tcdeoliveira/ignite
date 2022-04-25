@@ -3,7 +3,20 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next/types';
 import { getPrismicClient } from '../../Services/prismic';
 import * as Prismic from '@prismicio/client'
-export default function Posts(){
+import {RichText} from 'prismic-dom'
+
+type Post = {
+    slug: string,
+    title: string,
+    excerpt: string,
+    updatedAt: string
+}
+
+interface IPostsProps {
+    posts: Post[]
+}
+
+export default function Posts({posts}: IPostsProps){
     return(
         <>
             <Head>
@@ -11,21 +24,13 @@ export default function Posts(){
             </Head>
             <main className={styles.container}>
                 <div className={styles.container__posts}>
-                    <a href="#">
-                        <time>Quando</time>
-                        <strong>Titulo</strong>
-                        <p>Paragrafo</p>
-                    </a>
-                    <a href="#">
-                        <time>Quando</time>
-                        <strong>Titulo</strong>
-                        <p>Paragrafo</p>
-                    </a>
-                    <a href="#">
-                        <time>Quando</time>
-                        <strong>Titulo</strong>
-                        <p>Paragrafo</p>
-                    </a>
+                    {posts.map(post => (
+                        <a key={post.slug} href="#">
+                            <time>{post.updatedAt}</time>
+                            <strong>{post.title}</strong>
+                            <p>{post.excerpt}</p>
+                        </a>
+                    ))}
                 </div>
             </main>
         </>
@@ -33,7 +38,6 @@ export default function Posts(){
 }
 
 export const getStaticProps:GetStaticProps = async()=> {
-    console.log('loading primisc')
     const prismic = getPrismicClient();
     const response = await prismic.query(
         [Prismic.predicates.at('document.type', 'post')],
@@ -42,10 +46,22 @@ export const getStaticProps:GetStaticProps = async()=> {
             pageSize: 100
         }
     );
-    console.log('response: ' + JSON.stringify(response, null, 2))
+    const posts = response.results.map(post=>{
+        return {
+            slug: post.uid,
+            title: RichText.asText(post.data.title),
+            excerpt: post.data.content.find(content=>content.type === 'paragraph')?.text ?? '',
+            updatedAt: new Date(post.last_publication_date).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year:'numeric'
+            })
+        }
+    });
+    //console.log('response: ' + JSON.stringify(response, null, 2))
     return {
         props: {
-
+            posts
         }
     }
 }
