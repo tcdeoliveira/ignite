@@ -1,7 +1,12 @@
-import NextAuth from "next-auth"
+import NextAuth, { Session } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import { fauna } from "../../../Services/fauna"
-import { query } from "faunadb"
+import { query as q } from "faunadb"
+interface IUserSession {
+  user:{
+    email:string
+  }
+}
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
@@ -17,27 +22,59 @@ export default NextAuth({
     // ...add more providers here
   ],
   callbacks:{
+    async session({session}){
+      try {
+        const subscription = await fauna.query(
+          q.Get(
+            q.Intersection([
+              q.Match(
+                q.Index('sub_by_user_ref'),
+                q.Select(
+                  "ref",
+                  q.Get(
+                    q.Match(
+                      q.Index('user_by_email'),
+                      q.Casefold(session.user.email)
+                    )
+                  )
+                )
+              ),
+              q.Match(
+                q.Index('subscription_by_status'),
+                "active"
+              )
+            ])
+          )
+        )       
+        return {
+          ...session,
+          activeSubscription:subscription
+        };
+      } catch (error) {
+       return session; 
+      }      
+    },
     async signIn({ user, account, profile }){
       const {email} = user;
       try {
         await fauna.query(
-          query.If(
-            query.Not(
-              query.Exists(
-                query.Match(
-                  query.Index('user_by_email'),
-                  query.Casefold(user.email)                    
+          q.If(
+            q.Not(
+              q.Exists(
+                q.Match(
+                  q.Index('user_by_email'),
+                  q.Casefold(user.email)                    
                 )
               )
             ),
-            query.Create(
-              query.Collection('users'),
+            q.Create(
+              q.Collection('users'),
               {data: {email}}
             ),
-            query.Get(
-              query.Match(
-                query.Index('user_by_email'),
-                query.Casefold(user.email)
+            q.Get(
+              q.Match(
+                q.Index('user_by_email'),
+                q.Casefold(user.email)
               )
             )
           ),
