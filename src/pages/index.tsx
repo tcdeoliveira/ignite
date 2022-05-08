@@ -10,8 +10,8 @@ interface IHomeProps{
     amount: number
   }
 }
+
 export default function Home({product}:IHomeProps) {
-  console.log('product: ', product)
   return (
     <>
       <Head>
@@ -42,7 +42,6 @@ export const getStaticProps:GetStaticProps = async () => {
       currency: "USD"
     }).format((price.unit_amount / 100)),
   }
-  console.log('product 2: ', product)
   return {
     props: {product},
     revalidate: 6000

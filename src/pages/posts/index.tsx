@@ -18,6 +18,7 @@ interface IPostsProps {
 }
 
 export default function Posts({posts}: IPostsProps){
+    console.log('posts')
     return(
         <>
             <Head>
