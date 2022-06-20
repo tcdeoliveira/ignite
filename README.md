@@ -1,2 +1,2 @@
-# ignite
-This repository contains projects of the ignite course from Rocketseat🚀
+# ignite - React JS
+This repository contains the projects of the ignite program from Rocketseat🚀
