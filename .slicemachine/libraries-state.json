@@ -1,0 +1,92 @@
+{
+  "slices": {
+    "components": {
+      "post": {
+        "library": "slices",
+        "id": "post",
+        "name": "Post",
+        "description": "Post",
+        "model": {
+          "id": "post",
+          "type": "SharedSlice",
+          "name": "Post",
+          "description": "Post",
+          "variations": [
+            {
+              "id": "default",
+              "name": "Default",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "Post",
+              "primary": {
+                "title": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "heading1",
+                    "label": "Title",
+                    "placeholder": "This is where it all begins..."
+                  }
+                },
+                "description": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "paragraph",
+                    "label": "Description",
+                    "placeholder": "A nice description of your feature"
+                  }
+                },
+                "content": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Content",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  }
+                }
+              },
+              "items": {},
+              "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+            }
+          ]
+        },
+        "mocks": {
+          "default": {
+            "variation": "default",
+            "name": "Default",
+            "slice_type": "post",
+            "items": [],
+            "primary": {
+              "title": [
+                {
+                  "type": "heading1",
+                  "text": "Unleash leading-edge infrastructures",
+                  "spans": []
+                }
+              ],
+              "description": [
+                {
+                  "type": "paragraph",
+                  "text": "Esse occaecat aliqua aliquip officia aliqua Lorem fugiat.",
+                  "spans": []
+                }
+              ],
+              "content": [
+                {
+                  "type": "paragraph",
+                  "text": "Enim est fugiat aliqua excepteur incididunt est ipsum nostrud Lorem laboris veniam exercitation aliqua.",
+                  "spans": []
+                }
+              ]
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "extension": "js"
+        },
+        "screenshotPaths": {}
+      }
+    }
+  }
+}

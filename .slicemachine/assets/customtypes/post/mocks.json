@@ -1,0 +1,24 @@
+{
+  "id": "4c93e1e3-17db-41f2-a0a7-ef870146ed3a",
+  "uid": "aut-enim-earum",
+  "type": "post",
+  "data": {
+    "title": "synergize B2C infomediaries",
+    "image": {
+      "dimensions": {
+        "width": 900,
+        "height": 500
+      },
+      "alt": "Placeholder image",
+      "copyright": null,
+      "url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a?w=900&h=500&fit=crop"
+    },
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Cillum laborum esse pariatur occaecat sint excepteur occaecat in deserunt enim laboris Lorem esse pariatur. Velit excepteur consectetur ipsum aliqua magna dolore consectetur et sit qui sit aute. Exercitation incididunt ex ipsum consequat ut do mollit ut.",
+        "spans": []
+      }
+    ]
+  }
+}
